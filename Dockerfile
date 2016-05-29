@@ -35,7 +35,6 @@ RUN rm -rf /var/install
 RUN yum install -y passwd openssh-server
 #设置root的密码为baidu.com
 RUN echo 'baidu.com' | passwd --stdin root
-RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
 RUN ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
 RUN ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 
@@ -45,6 +44,9 @@ EXPOSE 80
 EXPOSE 22
 RUN chmod +x /start.sh
 
+#日志拿出来
 WORKDIR  /home/bae/log
+RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
+
 
 CMD ["/bin/bash", "/start.sh"]
