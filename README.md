@@ -59,7 +59,7 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 
 使用中若有问题，都建议 [在这里提交Issue](https://github.com/lyhiving/baelnmp/issues/new)   
 
-亲，加微信：`689562`  交流。
+
 
 这里附上一个小Tips，如果你改了服务器的ssh端口，*git clone* 走ssh模式是会失败的。这个时候就需要改下地址，代码：
 
@@ -70,9 +70,15 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 `git clone ssh://git@github.com:22/lyhiving/baelnmp.git`
 
 
+>最后，如果登陆ssh会发现需要密码，这个主要适应百度的Webssh，root的密码为: `root`
+
+
+亲，加微信：`689562`  交流。
 
 
 —by lyhiving
+
+
 
 
 

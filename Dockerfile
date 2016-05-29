@@ -31,17 +31,20 @@ COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 
-#SSH的安装
-RUN yum install -y passwd openssh-server
-#设置root的密码为baidu.com
-RUN echo 'baidu.com' | passwd --stdin root
-RUN ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
-RUN ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 
+# setup sshd
+RUN yum install -y openssh-server openssh-clients
+RUN echo 'root:root' | chpasswd
+RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 
-ADD __ORG__/start.sh /start.sh
+## Suppress error message 'Could not load host key: ...'
+RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -C '' -N ''
+RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_dsa_key -C '' -N ''
+
 EXPOSE 80
 EXPOSE 22
+
+ADD __ORG__/start.sh /start.sh
 RUN chmod +x /start.sh
 
 #日志拿出来
