@@ -38,10 +38,10 @@ RUN echo 'root:root' | chpasswd
 #RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 
 ## Suppress error message 'Could not load host key: ...'
-RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -C '' -N ''
-RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_dsa_key -C '' -N ''
-RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_ecdsa_key -C '' -N ''
-RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_ed25519_key -C '' -N ''
+RUN /usr/bin/ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' 
+RUN /usr/bin/ssh-keygen -q -t dsa -f /etc/ssh/ssh_host_dsa_key -C '' -N ''
+RUN /usr/bin/ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
+RUN /usr/bin/ssh-keygen -q -t dsa -f /etc/ssh/ssh_host_ed25519_key  -N ''
 
 EXPOSE 80
 EXPOSE 22
