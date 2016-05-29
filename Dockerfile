@@ -31,27 +31,24 @@ COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 
+EXPOSE 80
 
 # setup sshd
-RUN yum install -y openssh-server openssh-clients passwd
-RUN echo 'root:root' | chpasswd
-#RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+RUN yum -y install openssh-server openssh-clients epel-release sudo && \
+    rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
+RUN yum -y install pwgen
 
-## Suppress error message 'Could not load host key: ...'
-RUN /usr/bin/ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' 
-RUN /usr/bin/ssh-keygen -q -t dsa -f /etc/ssh/ssh_host_dsa_key -C '' -N ''
-RUN /usr/bin/ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
-RUN /usr/bin/ssh-keygen -q -t dsa -f /etc/ssh/ssh_host_ed25519_key  -N ''
+COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
+COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
 
-EXPOSE 80
 EXPOSE 22
+#RUN chmod +x install_sshd.sh;/install_sshd.sh
+RUN systemctl enable sshd
 
 ADD __ORG__/start.sh /start.sh
 RUN chmod +x /start.sh
 
-ADD __ORG__/useradd.sh /useradd.sh
-RUN chmod +x /useradd.sh
-RUN /useradd.sh
 
 #日志拿出来
 WORKDIR  /home/bae/log
