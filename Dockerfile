@@ -36,7 +36,7 @@ EXPOSE 80
 # setup sshd
 
 RUN yum -y install openssh-server openssh-clients sudo passwd && \
-	RUN echo 'root' | passwd --stdin root
+	echo 'root' | passwd --stdin root
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     yum clean all 
