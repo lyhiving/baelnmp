@@ -37,8 +37,7 @@ EXPOSE 80
 RUN yum -y install openssh-server openssh-clients epel-release sudo && \
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum -y install pwgen
+RUN yum clean all;yum -y install pwgen
 
 COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
 COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
