@@ -34,17 +34,15 @@ RUN rm -rf /var/install
 EXPOSE 80
 
 # setup sshd
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum repolist && \
-    yum install pwgen -y && \
-    yum clean all
-RUN yum -y install openssh-server openssh-clients sudo && \
+
+RUN yum -y install openssh-server openssh-clients sudo passwd && \
+	RUN echo 'root' | passwd --stdin root
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     yum clean all 
 
 COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
-COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
+#COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
 
 EXPOSE 22
 #RUN chmod +x install_sshd.sh;/install_sshd.sh
