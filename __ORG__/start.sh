@@ -1,3 +1,3 @@
 #!/bin/bash
 /usr/bin/lnmp start
-/usr/sbin/sshd 
+/usr/sbin/sshd -D

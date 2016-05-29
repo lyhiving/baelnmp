@@ -30,7 +30,14 @@ RUN cd /var/install/lnmp;chmod a+x install.sh;./install.sh lnmp root y 6 6 1
 COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
-RUN yum install -y openssh-server
+
+#SSH的安装
+RUN yum install -y passwd openssh-server
+#设置root的密码为baidu.com
+echo 'baidu.com' | passwd --stdin root
+RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
+RUN ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
+RUN ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 
 
 ADD __ORG__/start.sh /start.sh
@@ -39,6 +46,5 @@ EXPOSE 22
 RUN chmod +x /start.sh
 
 WORKDIR  /home/bae/log
-RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
 
 CMD ["/bin/bash", "/start.sh"]
