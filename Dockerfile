@@ -28,10 +28,12 @@ RUN cd /var/install/lnmp;chmod a+x install.sh;./install.sh lnmp root y 6 6 1
 
 # 安装完成后处理
 COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
-COPY ["__ORG__/rc.local", "/etc/rc.local"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 RUN yum install -y openssh-server
+
+RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
+
 ADD __ORG__/start.sh /start.sh
 EXPOSE 80
 EXPOSE 22
