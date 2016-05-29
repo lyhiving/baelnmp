@@ -2,6 +2,8 @@
 
 LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云BAE专业版
 
+项目地址： [https://github.com/lyhiving/baelnmp](https://github.com/lyhiving/baelnmp)
+
 首先说下，目前已经有很多Docker版的LNMP镜像，这个跟其他LNMP的区别是：
 
 * 不是YUM安装，而是 ** 编译** ，文件来自 [lnmp.org](http://www.lnm.org/) 用的是lnmp1.3下载版。
@@ -9,7 +11,7 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 * 好玩的地方是 */home/wwwroot/app*  下面vhost你可以放置nginx配置文件，web放置网站文件。每次更新都会自动生效。
 
 
-> 吐槽下百度云，只提供了镜像仓库，而没有提供构建工具，这个就需要你在其他地方构建好后，在push过去到百度云里面。
+> 吐槽下百度云，只提供了镜像仓库，而没有提供构建工具。所以才有了这个项目，在其他地方构建好后，再push过去到百度云里面。
 
 --------
 ## 解决办法
@@ -34,7 +36,8 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 
 `docker pull registry.aliyuncs.com/admin/lnmp`
 
-== 需要替换相应的登陆名和镜像地址 ==
+
+记得替换相应的登陆名和镜像地址
 
 ###2、提交到百度
 
@@ -54,7 +57,10 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 --------
 剩下的就就是去百度BAE里面查看镜像，部署到你的设备上。
 
-使用中有有问题，都建议 [在这里提交Issue](http://https://github.com/lyhiving/baelnmp/issues/new)   加微信：689562 交流。
+使用中若有问题，都建议 [在这里提交Issue](https://github.com/lyhiving/baelnmp/issues/new)   
+
+亲，加微信：`689562`  交流。
+
 
 
 —by lyhiving
