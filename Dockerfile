@@ -36,8 +36,10 @@ EXPOSE 80
 # setup sshd
 RUN yum -y install openssh-server openssh-clients epel-release sudo && \
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
-    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
-RUN yum clean all;yum -y install pwgen
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
+    yum repolist && \
+    yum install pwgen -y && \
+    yum clean all
 
 COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
 COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
