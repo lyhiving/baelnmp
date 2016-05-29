@@ -33,13 +33,15 @@ RUN rm -rf /var/install
 
 
 # setup sshd
-RUN yum install -y openssh-server openssh-clients
+RUN yum install -y openssh-server openssh-clients passwd
 RUN echo 'root:root' | chpasswd
-RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+#RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 
 ## Suppress error message 'Could not load host key: ...'
 RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -C '' -N ''
 RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_dsa_key -C '' -N ''
+RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_ecdsa_key -C '' -N ''
+RUN /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_ed25519_key -C '' -N ''
 
 EXPOSE 80
 EXPOSE 22
