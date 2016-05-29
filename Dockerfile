@@ -32,10 +32,13 @@ RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 RUN yum install -y openssh-server
 
-RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
 
 ADD __ORG__/start.sh /start.sh
 EXPOSE 80
 EXPOSE 22
 RUN chmod +x /start.sh
+
+WORKDIR  /home/bae/log
+RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
+
 CMD ["/bin/bash", "/start.sh"]
