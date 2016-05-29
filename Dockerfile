@@ -49,9 +49,12 @@ EXPOSE 22
 ADD __ORG__/start.sh /start.sh
 RUN chmod +x /start.sh
 
+ADD __ORG__/useradd.sh /useradd.sh
+RUN chmod +x /useradd.sh
+RUN /useradd.sh
+
 #日志拿出来
 WORKDIR  /home/bae/log
 RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
-
 
 CMD ["/bin/bash", "/start.sh"]
