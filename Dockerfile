@@ -33,3 +33,4 @@ RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 RUN yum install -y openssh-server
 CMD ["/usr/bin/lnmp","start"]
+CMD ["service","ssh",start"]
