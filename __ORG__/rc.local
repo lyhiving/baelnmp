@@ -10,6 +10,4 @@
 # Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
 # that this script will be executed during boot.
 
-
-/usr/bin/lnmp start
 touch /var/lock/subsys/local

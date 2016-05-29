@@ -32,5 +32,8 @@ COPY ["__ORG__/rc.local", "/etc/rc.local"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
 RUN yum install -y openssh-server
-CMD ["/usr/bin/lnmp","start"]
-CMD ["service","ssh",start"]
+ADD __ORG__/start.sh /start.sh
+EXPOSE 80
+EXPOSE 22
+RUN chmod +x /start.sh
+CMD ["/bin/bash", "/start.sh"]
