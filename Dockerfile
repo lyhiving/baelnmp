@@ -42,10 +42,8 @@ RUN yum -y install openssh-server openssh-clients sudo passwd && \
     yum clean all 
 
 COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
-#COPY ["__ORG__/install_sshd.sh", "/install_sshd.sh"]
 
 EXPOSE 22
-#RUN chmod +x install_sshd.sh;/install_sshd.sh
 RUN systemctl enable sshd
 
 ADD __ORG__/start.sh /start.sh
@@ -56,4 +54,6 @@ RUN chmod +x /start.sh
 WORKDIR  /home/bae/log
 RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
 
-CMD ["/bin/bash", "/start.sh"]
+RUN /bin/bash /start.sh
+
+#CMD ["/bin/bash", "/start.sh"]
