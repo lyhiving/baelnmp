@@ -1,5 +1,5 @@
 # Base image to use, this must be set as the first line
-FROM ansible/centos7-ansible:1.7
+FROM ansible/centos7-ansible:stable
 
 # Maintainer: docker_user <docker_user at email.com> (@docker_user)
 MAINTAINER lyhiving lyhiving@gmail.com
@@ -17,7 +17,7 @@ RUN yum clean all
 RUN yum makecache
 
 # 下载依赖包
-RUN yum install -y wget telnet gcc gcc-c++ autoconf libxml libxml2-devel libcurl libcurl-devel libpng libpng-devel freetype freetype-devel gd gd-devel libjpeg libjpeg-devel openssl libvpx libvpx-devel libmcrypt libmcrypt-devel ncurses ncurses-devel wget openssl openssl-devel pcre pcre-devel vim cmake bzip2 screen
+RUN yum install -y wget telnet gcc gcc-c++ autoconf libxml libxml2-devel libcurl libcurl-devel libpng libpng-devel freetype freetype-devel gd gd-devel libjpeg libjpeg-devel openssl libvpx libvpx-devel libmcrypt libmcrypt-devel ncurses ncurses-devel wget openssl openssl-devel pcre pcre-devel vim cmake bzip2 screen openssh-server openssh-clients sudo passwd
 
 # 解压并安装lnmp
 COPY ["__ORG__/lnmp.tar.gz", "/var/install/lnmp.tar.gz"]
@@ -35,11 +35,9 @@ EXPOSE 80
 
 # setup sshd
 
-RUN yum -y install openssh-server openssh-clients sudo passwd && \
-	echo 'root' | passwd --stdin root && \
+RUN echo 'root' | passwd --stdin root && \
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
-    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
-    yum clean all 
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key 
 
 COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
 
