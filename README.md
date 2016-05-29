@@ -1,4 +1,4 @@
-#lnmp兼容百度BAE的Docker
+#LNMP的Docker版（兼容百度BAE）
 
 LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云BAE专业版
 
@@ -60,6 +60,15 @@ LNMP(Centos 7, Nginx 1.10, MySQL 5.7, PHP 7.0) 的Dcoker版本，兼容百度云
 使用中若有问题，都建议 [在这里提交Issue](https://github.com/lyhiving/baelnmp/issues/new)   
 
 亲，加微信：`689562`  交流。
+
+这里附上一个小Tips，如果你改了服务器的ssh端口，*git clone* 走ssh模式是会失败的。这个时候就需要改下地址，代码：
+
+`git clone git@github.com:lyhiving/baelnmp.git`
+
+改成
+
+`git clone ssh://git@github.com:22/lyhiving/baelnmp.git`
+
 
 
 

@@ -30,5 +30,5 @@ RUN cd /var/install/lnmp;chmod a+x install.sh;./install.sh lnmp root y 6 6 1
 COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
 COPY ["__ORG__/rc.local", "/etc/rc.local"]
 RUN ln -s /home/wwwroot/app /home/bae/app
-RUN /usr/bin/lnmp start
 RUN rm -rf /var/install
+CMD ["/usr/bin/lnmp","start"]

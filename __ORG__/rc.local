@@ -11,7 +11,5 @@
 # that this script will be executed during boot.
 
 
-/usr/bin/lnmp nginx start
-/usr/bin/lnmp mysql start
-/usr/bin/lnmp php-fpm start
+/usr/bin/lnmp start
 touch /var/lock/subsys/local
