@@ -17,7 +17,7 @@ RUN yum clean all
 RUN yum makecache
 
 # 下载依赖包
-RUN yum install -y openssh-server wget telnet gcc gcc-c++ autoconf libxml libxml2-devel libcurl libcurl-devel libpng libpng-devel freetype freetype-devel gd gd-devel libjpeg libjpeg-devel openssl libvpx libvpx-devel libmcrypt libmcrypt-devel ncurses ncurses-devel openssl openssl-devel pcre pcre-devel vim cmake bzip2 screen
+RUN yum install -y wget telnet gcc gcc-c++ autoconf libxml libxml2-devel libcurl libcurl-devel libpng libpng-devel freetype freetype-devel gd gd-devel libjpeg libjpeg-devel openssl libvpx libvpx-devel libmcrypt libmcrypt-devel ncurses ncurses-devel wget openssl openssl-devel pcre pcre-devel vim cmake bzip2 screen
 
 # 解压并安装lnmp
 COPY ["__ORG__/lnmp.tar.gz", "/var/install/lnmp.tar.gz"]
@@ -31,4 +31,5 @@ COPY ["__ORG__/nginx.conf", "/usr/local/nginx/conf/nginx.conf"]
 COPY ["__ORG__/rc.local", "/etc/rc.local"]
 RUN ln -s /home/wwwroot/app /home/bae/app
 RUN rm -rf /var/install
+RUN yum install -y openssh-server
 CMD ["/usr/bin/lnmp","start"]
