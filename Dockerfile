@@ -54,5 +54,4 @@ RUN chmod +x /start.sh
 WORKDIR  /home/bae/log
 RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
 WORKDIR  /home/bae/app
-RUN lnmp start
-#CMD ["/bin/bash", "/start.sh"]
+CMD ["/start.sh"]
