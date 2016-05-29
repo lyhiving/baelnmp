@@ -1,2 +1,4 @@
 #!/bin/bash
-/usr/bin/lnmp start 2>&1 | tee /home/bae/log/boot.log
+/etc/init.d/nginx start
+/etc/init.d/mysql start
+/etc/init.d/php-fpm start
