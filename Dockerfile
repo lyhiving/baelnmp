@@ -50,6 +50,7 @@ RUN chmod +x /start.sh
 
 #日志拿出来
 WORKDIR  /home/bae/log
-RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log
+RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log && \
+	/start.sh
 WORKDIR  /home/bae/app
-CMD ["/start.sh"]
+#CMD ["/start.sh"]
