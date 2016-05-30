@@ -34,23 +34,12 @@ RUN rm -rf /var/install
 EXPOSE 80
 
 # setup sshd
-
-RUN echo 'root' | passwd --stdin root && \
-    rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
-    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key 
-
-COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
-
+RUN yum install openssh-server -y
+RUN sed -i 's/PasswordAuthentication\ yes/PasswordAuthentication\ no/' /etc/ssh/sshd_config && echo 'AllowUsers dev' >> /etc/ssh/sshd_config
 EXPOSE 22
-RUN systemctl enable sshd
+
 
 ADD __ORG__/start.sh /start.sh
 RUN chmod +x /start.sh
 
-
-#日志拿出来
-WORKDIR  /home/bae/log
-RUN cp /root/lnmp-install.log /home/bae/log/lnmp-install.log && \
-	/start.sh
-WORKDIR  /home/bae/app
-#CMD ["/start.sh"]
+CMD ["/bin/bash", "/start.sh"]
