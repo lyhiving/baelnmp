@@ -34,8 +34,11 @@ RUN rm -rf /var/install
 EXPOSE 80
 
 # setup sshd
-RUN sed -i 's/PasswordAuthentication\ yes/PasswordAuthentication\ no/' /etc/ssh/sshd_config && echo 'AllowUsers dev' >> /etc/ssh/sshd_config
-EXPOSE 22
+RUN echo 'root' | passwd --stdin root && \
+    rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key /etc/ssh/ssh_host_dsa_key && \
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key 
+
+COPY ["__ORG__/sshd_config","/etc/ssh/sshd_config"]
 
 
 ADD __ORG__/start.sh /start.sh
