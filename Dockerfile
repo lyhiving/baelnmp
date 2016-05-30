@@ -12,7 +12,7 @@ WORKDIR  /home/bae/app
 # 操作yum源
 RUN mv /etc/yum.repos.d /etc/yum.repos.d.bak
 RUN mkdir /etc/yum.repos.d
-COPY ["__ORG__/Centos-7.repo", "/etc/yum.repos.d/Centos-7.repo"]
+COPY ["__ORG__/Centos.repo", "/etc/yum.repos.d/Centos.repo"]
 RUN yum clean all
 RUN yum makecache
 
