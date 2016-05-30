@@ -34,7 +34,6 @@ RUN rm -rf /var/install
 EXPOSE 80
 
 # setup sshd
-RUN yum install openssh-server -y
 RUN sed -i 's/PasswordAuthentication\ yes/PasswordAuthentication\ no/' /etc/ssh/sshd_config && echo 'AllowUsers dev' >> /etc/ssh/sshd_config
 EXPOSE 22
 
